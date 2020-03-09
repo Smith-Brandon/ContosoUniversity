@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ContosoUniversity.Models;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models.SchoolViewModels;
+using System.Data.Common;
 
 namespace ContosoUniversity.Controllers
 {
@@ -21,34 +21,48 @@ namespace ContosoUniversity.Controllers
             _context = context;
         }
 
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
 
         public async Task<ActionResult> About()
         {
-            IQueryable<EnrollmentDateGroup> data =
-                from student in _context.Students
-                group student by student.EnrollmentDate into dateGroup
-                select new EnrollmentDateGroup()
+            List<EnrollmentDateGroup> groups = new List<EnrollmentDateGroup>();
+            var conn = _context.Database.GetDbConnection();
+            try
+            {
+                await conn.OpenAsync();
+                using (var command = conn.CreateCommand())
                 {
-                    EnrollmentDate = dateGroup.Key,
-                    StudentCount = dateGroup.Count()
-                };
-            return View(await data.AsNoTracking().ToListAsync());
+                    string query = "SELECT EnrollmentDate, COUNT(*) AS StudentCount "
+                        + "FROM Person "
+                        + "WHERE Discriminator = 'Student' "
+                        + "GROUP BY EnrollmentDate";
+                    command.CommandText = query;
+                    DbDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var row = new EnrollmentDateGroup { EnrollmentDate = reader.GetDateTime(0), StudentCount = reader.GetInt32(1) };
+                            groups.Add(row);
+                        }
+                    }
+                    reader.Dispose();
+                }
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return View(groups);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
