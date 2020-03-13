@@ -75,14 +75,16 @@ body {
 }
 .mainDiv {
     background-color: #ffffff;
-    max-width: 90%;
-    min-width: 80%;
+    max-width: 100%;
+    min-width: 90%;
     min-height: 80%;
     max-height: 90%;
     margin: auto;
     display: inline-block;
     flex-wrap: nowrap;
     padding: 20px;
+    margin: auto;
+
 }
 .student-image {
     background-image: url(../images/pexels-photo-1205651.jpg);
@@ -108,4 +110,7 @@ body {
 .row {
 text-align: center;
 
+}
+.statistic {
+margin:auto;
 }

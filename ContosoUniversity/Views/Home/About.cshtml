@@ -1,30 +1,45 @@
 ﻿@model IEnumerable<ContosoUniversity.Models.SchoolViewModels.EnrollmentDateGroup>
 
 @{
-    ViewData["Title"] = "Student Body Statistics";
+    ViewData["Title"] = "About Us - Student Body Statistics";
 }
+    <div class="row">
+        <div class="col-md-4">
+            <h1>About Us</h1>
+            <p>
+                This website was put together<br> by Brandon Smith.<br>
+                Contact Email: Smi11037@byui.edu
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2>Student Body Statistics</h2>
+            <table class="statistic">
+                <tr>
+                    <th>
+                        Enrollment Date
+                    </th>
+                    <th>
+                        Students
+                    </th>
+                </tr>
 
-<h2>Student Body Statistics</h2>
-
-<table>
-    <tr>
-        <th>
-            Enrollment Date
-        </th>
-        <th>
-            Students
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
-            </td>
-            <td>
-                @item.StudentCount
-            </td>
-        </tr>
-    }
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                        </td>
+                        <td>
+                            @item.StudentCount
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h1>Class CIT 365</h1>
+            <p>
+               Week 10 Contoso University Assignment.
+            </p>
+        </div>
+    </div>
