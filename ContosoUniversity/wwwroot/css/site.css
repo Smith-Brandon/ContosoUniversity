@@ -59,13 +59,28 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-image: url('../images/yale-university-landscape-universities-schools-159490.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #ffffff;
+}
+.mainDiv {
+    background-color: #ffffff;
+    max-width: 90%;
+    min-width: 80%;
+    min-height: 80%;
+    max-height: 90%;
+    margin: auto;
+    display: inline-block;
+    flex-wrap: nowrap;
+    padding: 10px;
 }
