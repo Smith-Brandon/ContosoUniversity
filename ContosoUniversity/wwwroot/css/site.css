@@ -82,5 +82,30 @@ body {
     margin: auto;
     display: inline-block;
     flex-wrap: nowrap;
+    padding: 20px;
+}
+.student-image {
+    background-image: url(../images/pexels-photo-1205651.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 300px;
+    padding: 10px;    
+}
+.instructor-image {
+    background-image: url('../images/pexels-photo-1181519.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 300px;
     padding: 10px;
+}
+.course-image {
+    background-image: url('../images/course.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 300px;
+    padding: 10px;
+}
+.row {
+text-align: center;
+
 }
